@@ -13,6 +13,11 @@ gem 'devise'
 gem 'foundation-rails'
 gem 'pg'
 gem 'pundit'
+
+# Use Ember as the front-end MVC package
+gem 'ember-rails'
+gem 'ember-data-source', '>= 1.0.0.beta7'
+
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_21]

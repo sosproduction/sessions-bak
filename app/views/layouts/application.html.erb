@@ -4,10 +4,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= content_for?(:title) ? yield(:title) : "Sessions" %></title>
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Sessions" %>">
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    
     <%# Modernizr is required for Zurb Foundation %>
     <%= javascript_include_tag 'vendor/modernizr' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
   </head>
   <body>
@@ -15,8 +15,24 @@
       <%= render 'layouts/navigation' %>
     </header>
     <main role="main">
-       <%= render 'layouts/messages' %>
-       <%= yield %>
+      <%= render 'layouts/messages' %>
+      
+        <%= yield %>
+
+       <% if current_page?(:controller => 'devise/registrations', :action => 'edit') %>
+          <!--<%= javascript_include_tag 'application' %>-->
+          <h1>we are editing a user</h1>
+      <% end %>
+      
+      <% if current_page?(:controller => '/users', :action => 'index') %>
+         <h1>we are looking at users</h1>
+      <% end %>
+
+      <% url = Rails.application.routes.recognize_path(request.env['PATH_INFO']) %>
+      <%= url[:controller] %>
+      <%= url[:action] %>
+
+
     </main>
   </body>
 </html>
